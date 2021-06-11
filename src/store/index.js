@@ -10,10 +10,12 @@ const initialState = {
 
 const SIGN_IN = 'SIGN_IN';
 const FIND_USER = 'FIND_USER';
+const LOG_OUT = 'LOG_OUT';
 
 export const actions = {
   signIn: (data) => ({ type: SIGN_IN, payload: data }),
-  findUser: (data) => ({ type: FIND_USER, payload: data })
+  findUser: (data) => ({ type: FIND_USER, payload: data }),
+  logOut: () => ({ type: LOG_OUT }),
 }
 
 function userReducer(state = initialState, action) {
@@ -42,7 +44,14 @@ function userReducer(state = initialState, action) {
         }
       }
 
-      return state
+      return state;
+
+    case LOG_OUT:
+      return {
+        ...state,
+        loggedUserId: null,
+        loggedUser: null,
+      }
 
 
     default:

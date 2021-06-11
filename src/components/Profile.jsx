@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { getUser } from '../Server/api';
+import { actions } from '../store';
 
 export const Profile = () => {
   const loggedUserId = useSelector(state => state.loggedUserId);
@@ -20,11 +21,14 @@ export const Profile = () => {
     console.log(loggedUser);
   }
 
+  const logoutHandler = () => {
+    dispatch(actions.logOut())
+  }
+
   useEffect(() => {
     receiveLoggedUser()
   }, [loggedUserId])
 
-  console.log(loggedUser);
   if (!loggedUser) {
     return <p>Loading...</p>
   }
@@ -47,6 +51,7 @@ export const Profile = () => {
         </li>
         ))} 
         </ul>
+        <button onClick={logoutHandler}>Выйти</button>
     </div>
   )
 };
